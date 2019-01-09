@@ -77,49 +77,6 @@
                     </archive>
                 </configuration>
             </plugin>
-
-            <!-- obfuscates code -->
-            <plugin>
-                <groupId>com.github.wvengen</groupId>
-                <artifactId>proguard-maven-plugin</artifactId>
-                <version>2.0.14</version>
-                <executions>
-                    <execution>
-                        <id>obfuscation-packaging</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>proguard</goal>
-                        </goals>
-                        <configuration>
-                            <proguardVersion>${tool.proguard.version}</proguardVersion>
-                            <obfuscate>true</obfuscate>
-                            <attach>true</attach>
-                            <appendClassifier>false</appendClassifier>
-                            <addMavenDescriptor>true</addMavenDescriptor>
-                            <injar>${project.build.finalName}.jar</injar>
-                            <injarNotExistsSkip>true</injarNotExistsSkip>
-
-                            <options>
-                                <option>-libraryjars ${java.home}/jmods</option>
-                                <option>-dontnote</option>
-                                <option>-keepdirectories</option>
-                                <option>-keeppackagenames org.apache.maven.plugin.my.MyMojo</option>
-                                <option>-keep public class * {
-                                    public protected *;
-                                    }
-                                </option>
-                            </options>
-                        </configuration>
-                    </execution>
-                </executions>
-                <dependencies>
-                    <dependency>
-                        <groupId>net.sf.proguard</groupId>
-                        <artifactId>proguard-base</artifactId>
-                        <version>${tool.proguard.version}</version>
-                    </dependency>
-                </dependencies>
-            </plugin>
         </plugins>
     </build>
 </project>
